@@ -2,9 +2,16 @@ var PythonShell = require('python-shell');
 var bodyParser = require('body-parser')
 var express = require('express');
 var app = express();
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
+var mysql = require('mysql');
+var creds = require('./credentials');
 
+console.log(creds.foo)
+
+var connection = mysql.createConnection({
+  host: creds.host,
+  user: creds.user,
+  password: creds.password,
+  database: creds.database,
 });
 
 connection.connect();

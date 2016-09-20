@@ -2,8 +2,14 @@ var PythonShell = require('python-shell');
 var bodyParser = require('body-parser')
 var express = require('express');
 var app = express();
+var path = require('path');
 var mysql = require('mysql');
 var creds = require('./credentials');
+
+
+app.use(express.static(path.join(__dirname, 'public')));
+console.log(__dirname)
+
 
 console.log(creds.foo)
 
@@ -16,9 +22,15 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+// app.use(express.static(__dirname));
+
 app.use(bodyParser())
 
-app.post('/', function(req,res) {
+app.get('/', function(req,res) {
+   res.sendFile('index.html', {root: __dirname })
+});
+
+app.post('/questions', function(req,res) {
 
 	//console.log(req.body);
 	var qid = req.body.qid;
@@ -38,7 +50,7 @@ app.post('/', function(req,res) {
 });
 
 var blah = 1;
-app.get('/', function (req, res) {
+app.get('/questions', function (req, res) {
 	console.log("GET REQ")
 	connection.query('SELECT qid, uid, topic, question, answer, s_score, last_attempt, unix_timestamp(last_seen) as last_seen FROM questions WHERE uid="' + blah +'";', function(err, rows, fields) {
 	//console.log(rows)
@@ -80,7 +92,7 @@ app.get('/', function (req, res) {
   })
 });
 
-app.put('/', function (req, res) {
+app.put('/questions', function (req, res) {
   //res.send('Got a PUT request at /');
 
 	var answer_attempt = req.body.answer_attempt;

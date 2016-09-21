@@ -28,17 +28,22 @@
 
   <md-content layout-padding="">
     <div>
-      <form name="userForm">
+      <form name="userForm" ng-submit="onSubmit()">
+
+        <md-input-container class="md-block" flex-gt-sm="">
+            <label>Topic</label>
+            <input ng-model="fooObject.topic">
+        </md-input-container>
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Question</label>
-            <input>
+            <input ng-model="fooObject.q">
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm="">
             <label>Answer</label>
-            <input>
+            <input ng-model="fooObject.a">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
@@ -88,7 +93,7 @@
 
         <div layout="row" layout-align="center center">
 
-        <md-button class="md-raised md-primary">Submit</md-button>
+        <md-button class="md-raised md-primary" type="submit">Submit</md-button>
         </div>
 
       </form>

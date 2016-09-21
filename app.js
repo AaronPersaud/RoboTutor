@@ -32,7 +32,7 @@ app.get('/', function(req,res) {
 
 app.post('/questions', function(req,res) {
 
-	//console.log(req.body);
+	console.log(req.body);
 	var qid = req.body.qid;
 	var uid = req.body.uid;
 	var topic = req.body.topic;
@@ -42,7 +42,7 @@ app.post('/questions', function(req,res) {
 	var last_attempt = req.body.last_attempt;
 	var last_seen = req.body.last_seen;
 
-	connection.query('INSERT INTO questions (qid, uid, topic, question, answer, s_score, last_attempt) VALUES (' + qid + ',' + uid + ', "' + topic + '","' + question + '","' + answer + '",' + s_score + ',' + last_attempt + ');', function(err, rows, fields) {
+	connection.query('INSERT INTO questions (uid, topic, question, answer) VALUES (' + uid + ', "' + topic + '","' + question + '","' + answer + ');', function(err, rows, fields) {
 	  if (err) throw err;
 	  //console.log('The solution is: ', rows);
 	  res.send("SUCCESS")

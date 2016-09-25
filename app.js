@@ -1,6 +1,7 @@
 var PythonShell = require('python-shell');
 var bodyParser = require('body-parser')
 var express = require('express');
+var crypto = require('crypto');
 var app = express();
 var path = require('path');
 var mysql = require('mysql');
@@ -24,6 +25,17 @@ connection.connect();
 
 // app.use(express.static(__dirname));
 
+hashCode = function(str){
+    var hash = 0;
+    if (str.length == 0) return hash;
+    for (i = 0; i < str.length; i++) {
+        char = str.charCodeAt(i);
+        hash = ((hash<<5)-hash)+char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
 app.use(bodyParser())
 
 app.get('/', function(req,res) {
@@ -33,16 +45,18 @@ app.get('/', function(req,res) {
 app.post('/questions', function(req,res) {
 
 	console.log(req.body);
-	var qid = req.body.qid;
-	var uid = req.body.uid;
+	//var qid = req.body.qid;
+	var uid = hashCode(req.body.uid)
 	var topic = req.body.topic;
 	var question = req.body.question;
 	var answer = req.body.answer;
-	var s_score = req.body.s_score;
-	var last_attempt = req.body.last_attempt;
-	var last_seen = req.body.last_seen;
+	//var s_score = req.body.s_score;
+	//var last_attempt = req.body.last_attempt;
+	//var last_seen = req.body.last_seen;
 
-	connection.query('INSERT INTO questions (uid, topic, question, answer) VALUES (' + uid + ', "' + topic + '","' + question + '","' + answer + ');', function(err, rows, fields) {
+	var query = 'INSERT INTO questions (uid, topic, question, answer) VALUES (' + uid + ', "' + topic + '","' + question + '","' + answer + '");'
+	console.log(query);
+	connection.query(query, function(err, rows, fields) {
 	  if (err) throw err;
 	  //console.log('The solution is: ', rows);
 	  res.send("SUCCESS")

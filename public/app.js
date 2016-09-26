@@ -15,10 +15,8 @@ angular
       // Appending dialog to document.body to cover sidenav in docs app
       var confirm = $mdDialog.prompt()
         .title('Please Login')
-        //.textContent('Bowser is a common name.')
         .placeholder('Username')
-        .ariaLabel('Dog name')
-        //.initialValue('Buddy')
+        .ariaLabel('Username')
         .targetEvent(ev)
         .ok('Okay!')
         .cancel('Anonymous');
@@ -29,6 +27,7 @@ angular
         console.log(name)
       }, function() {
         $scope.status = 'You are not logged in';
+        $scope.fooObject.uid = "Anonymous"
       });
     };
 
@@ -53,6 +52,29 @@ angular
             $scope.topic = '';
             console.log($scope.fooObject)});
        console.log($scope.fooObject);
+    }
+
+    $scope.Done = function() {
+
+      $http.get('http://www.robotutor.me/questions',{
+        params: {uid: $scope.fooObject.uid}
+      })
+        .success(function(response) {
+          console.log("CONSOLE.LOG!!!!!")
+          console.log(response.results[0])
+          Display(response.results)
+        })
+    }
+
+    var Display = function(questions) {
+        for (var i = 0; i < questions.length; i++) {
+          //display first question
+          console.log(questions[i])
+          //hang until they answer question
+          //tell them if they got it right or wrong
+          //put request
+        }
+        // tell them all questions done. ask if they want to try again or add more questions
     }
 
   })

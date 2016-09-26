@@ -41,6 +41,9 @@ app.use(bodyParser())
 app.get('/', function(req,res) {
    res.sendFile('index.html', {root: __dirname })
 });
+app.get('/test', function(req, res) {
+	res.sendFile('public/questions.html', {root: __dirname })
+});
 
 app.post('/questions', function(req,res) {
 
@@ -66,7 +69,9 @@ app.post('/questions', function(req,res) {
 var blah = 1;
 app.get('/questions', function (req, res) {
 	console.log("GET REQ")
-	connection.query('SELECT qid, uid, topic, question, answer, s_score, last_attempt, unix_timestamp(last_seen) as last_seen FROM questions WHERE uid="' + blah +'";', function(err, rows, fields) {
+	console.log(req.query.uid)
+	var id = req.query.uid 
+	connection.query('SELECT qid, uid, topic, question, answer, s_score, last_attempt, unix_timestamp(last_seen) as last_seen FROM questions WHERE uid="' + id +'";', function(err, rows, fields) {
 	//console.log(rows)
   	//console.log(res.json(rows))
 

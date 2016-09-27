@@ -1,5 +1,15 @@
 angular
-  .module('MyApp',['ngMaterial' ])
+  .module('MyApp',['ngMaterial', 'ngRoute' ])
+  .config(function($routeProvider) {
+    $routeProvider
+    // .when("/", {
+    //     templateUrl : "index.html"
+    // })
+    .when("/q", {
+        templateUrl : "questions.html"
+    });
+  })
+
   .controller('DemoCtrl', function($scope, $mdDialog, $http) {
     $scope.user = {
       title: 'Enter your questions',
@@ -68,7 +78,7 @@ angular
 
     var Display = function(questions) {
         for (var i = 0; i < questions.length; i++) {
-          //display first question
+          //display question
           console.log(questions[i])
           //hang until they answer question
           //tell them if they got it right or wrong

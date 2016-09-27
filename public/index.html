@@ -10,6 +10,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.js"></script>
 <script src="app.js"></script>
 
 </head>
@@ -101,7 +102,7 @@
         <md-button class="md-raised md-primary" type="submit">Submit</md-button>
         </form>
 
-        <md-button class="md-raised md-primary" ng-click="Done()">Done</md-button>
+        <md-button href="#q" class="md-raised md-primary" ng-click="Done()">Done</md-button>
 
         </div>
 
@@ -117,6 +118,8 @@
       {{status}}
     </b>
   </div>
+
+  <div ng-view></div>
 
 </body>
 

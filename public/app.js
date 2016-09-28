@@ -66,6 +66,8 @@ angular
 
     $scope.card  = null;
 
+    $scope.set = null;
+
     $scope.Done = function() {
 
       $http.get('http://www.robotutor.me/questions',{
@@ -82,17 +84,17 @@ angular
     }
 
     $scope.quest = null;
-    $scope.set = null
     $scope.counter = 0
 
     $scope.next = function() {
         $scope.counter += 1;
-        
+        Display($scope.set)
     }
 
     var Display = function(questions) {
-
+          $scope.attempt = '';
           //display question
+          $scope.cardanswer = '';
           console.log(questions[$scope.counter])
           $scope.quest = questions[$scope.counter]
           //hang until they answer question
@@ -110,7 +112,7 @@ angular
       console.log($scope.quest.answer)
       console.log($scope.cardanswer)
       if ($scope.cardanswer === "") {
-        alert("ANSWER THE QUESTION");
+        //alert("ANSWER THE QUESTION");
       }
       else if ($scope.cardanswer !== $scope.quest.answer) {
         //alert("WRONG ANSWER")

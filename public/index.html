@@ -22,14 +22,16 @@
   <md-content md-theme="docs-dark" layout-align="center center" layout-gt-sm="row" layout-padding="">
     <div>
       <md-input-container>
-        <h1>Enter Questions</h1>
+        <h1>RoboTutor</h1>
       </md-input-container>
     </div>
   </md-content>
 
-  <md-content layout-padding="">
+  <md-content layout-padding="" ng-hide="card">
     <div>
       <form name="userForm" ng-submit="onSubmit()">
+
+      <h2>Enter Questions</h2>
 
         <md-input-container class="md-block" flex-gt-sm="">
             <label>Topic</label>
@@ -102,7 +104,7 @@
         <md-button class="md-raised md-primary" type="submit">Submit</md-button>
         </form>
 
-        <md-button href="#q" class="md-raised md-primary" ng-click="Done()">Done</md-button>
+        <md-button href="#q" class="md-raised md-primary" ng-model="myVar" ng-click="Done()">Done</md-button>
 
         </div>
 
@@ -119,7 +121,29 @@
     </b>
   </div>
 
-  <div ng-view></div>
+<div ng-show="card">
+    <md-content class="md-padding" layout-xs="column" layout="row" layout-align="center center">
+    <div flex="50">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Question: {{quest.question}}</span>
+            <md-input-container class="md-block" flex-gt-sm="">
+            <label>Answer</label>
+            <input ng-model="cardanswer" name="cardans">
+          </md-input-container>
+          <div layout="row">
+          <md-button flex="5" layout-align="center center" class="md-raised md-primary" ng-click="qanswer()">Submit</md-button>
+          <md-button flex="5" layout-align="center center" class="md-raised md-primary">Next</md-button>
+          <span class="md-headline">{{attempt}}</span>
+          </div>
+          </md-card-title-text>
+        </md-card-title>
+      </md-card>
+    </div>
+  </md-content>
+</div>
+
 
 </body>
 

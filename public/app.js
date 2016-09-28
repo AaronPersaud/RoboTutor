@@ -64,6 +64,8 @@ angular
        console.log($scope.fooObject);
     }
 
+    $scope.card  = null;
+
     $scope.Done = function() {
 
       $http.get('http://www.robotutor.me/questions',{
@@ -73,18 +75,52 @@ angular
           console.log("CONSOLE.LOG!!!!!")
           console.log(response.results[0])
           Display(response.results)
+          $scope.set = response.results
+          $scope.card = true;
+
         })
     }
 
+    $scope.quest = null;
+    $scope.set = null
+    $scope.counter = 0
+
+    $scope.next = function() {
+        $scope.counter += 1;
+        
+    }
+
     var Display = function(questions) {
-        for (var i = 0; i < questions.length; i++) {
+
           //display question
-          console.log(questions[i])
+          console.log(questions[$scope.counter])
+          $scope.quest = questions[$scope.counter]
           //hang until they answer question
           //tell them if they got it right or wrong
           //put request
-        }
         // tell them all questions done. ask if they want to try again or add more questions
+    }
+
+
+    $scope.cardanswer = '';
+
+    $scope.qanswer = function() {
+      console.log("QUESTION")
+      var test = $scope.cardanswer;
+      console.log($scope.quest.answer)
+      console.log($scope.cardanswer)
+      if ($scope.cardanswer === "") {
+        alert("ANSWER THE QUESTION");
+      }
+      else if ($scope.cardanswer !== $scope.quest.answer) {
+        //alert("WRONG ANSWER")
+        $scope.attempt = "Incorrect. Correct Answer: " + $scope.quest.answer
+      }
+      else {
+        //alert("CORRECT ANSWER")
+        $scope.attempt = "Correct!!!"
+      }
+      // $scope.cardanswer = '';
     }
 
   })

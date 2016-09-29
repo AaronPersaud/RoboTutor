@@ -1,14 +1,14 @@
 angular
   .module('MyApp',['ngMaterial', 'ngRoute' ])
-  .config(function($routeProvider) {
-    $routeProvider
-    // .when("/", {
-    //     templateUrl : "index.html"
-    // })
-    .when("/q", {
-        templateUrl : "questions.html"
-    });
-  })
+  // .config(function($routeProvider) {
+  //   $routeProvider
+  //   // .when("/", {
+  //   //     templateUrl : "index.html"
+  //   // })
+  //   .when("/q", {
+  //       templateUrl : "questions.html"
+  //   });
+  // })
 
   .controller('DemoCtrl', function($scope, $mdDialog, $http) {
     $scope.user = {
@@ -34,7 +34,7 @@ angular
       $mdDialog.show(confirm).then(function(result) {
         $scope.status = 'You are logged in as ' + result + '.';
         $scope.fooObject.uid = result
-        console.log(name)
+        //console.log(name)
       }, function() {
         $scope.status = 'You are not logged in';
         $scope.fooObject.uid = "Anonymous"
@@ -60,9 +60,10 @@ angular
             $scope.text = '';
             $scope.answer = '';
             $scope.topic = '';
-            console.log($scope.fooObject)});
-       console.log($scope.fooObject);
-    }
+            //console.log($scope.fooObject)});
+       //console.log($scope.fooObject);
+    })
+  }
 
     $scope.card  = null;
 
@@ -74,8 +75,8 @@ angular
         params: {uid: $scope.fooObject.uid}
       })
         .success(function(response) {
-          console.log("CONSOLE.LOG!!!!!")
-          console.log(response.results[0])
+          //console.log("CONSOLE.LOG!!!!!")
+          //console.log(response.results[0])
           Display(response.results)
           $scope.set = response.results
           $scope.card = true;
@@ -95,7 +96,7 @@ angular
           $scope.attempt = '';
           //display question
           $scope.cardanswer = '';
-          console.log(questions[$scope.counter])
+          //console.log(questions[$scope.counter])
           $scope.quest = questions[$scope.counter]
           //hang until they answer question
           //tell them if they got it right or wrong
@@ -107,10 +108,10 @@ angular
     $scope.cardanswer = '';
 
     $scope.qanswer = function() {
-      console.log("QUESTION")
+      //console.log("QUESTION")
       var test = $scope.cardanswer;
-      console.log($scope.quest.answer)
-      console.log($scope.cardanswer)
+      //console.log($scope.quest.answer)
+      //console.log($scope.cardanswer)
       if ($scope.cardanswer === "") {
         //alert("ANSWER THE QUESTION");
       }

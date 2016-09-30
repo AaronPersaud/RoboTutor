@@ -1,3 +1,3 @@
 # RoboTutor
-webapp that helps students study
-Check it out here <a href="http://robotutor.me">here</a>.
+<p>webapp that helps students study.</p>
+Check it out <a href="http://robotutor.me">here</a>.

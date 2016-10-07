@@ -77,9 +77,14 @@ angular
         .success(function(response) {
           //console.log("CONSOLE.LOG!!!!!")
           //console.log(response.results[0])
-          Display(response.results)
-          $scope.set = response.results
-          $scope.card = true;
+          if (response.results.length === 0) {
+               alert("You Have No Questions!!!!")
+          }
+          else {
+            Display(response.results)
+            $scope.set = response.results
+            $scope.card = true;
+          }
 
         })
     }
@@ -89,7 +94,14 @@ angular
 
     $scope.next = function() {
         $scope.counter += 1;
-        Display($scope.set)
+        if ($scope.counter + 1 > $scope.set.length) {
+          alert("Out of Questions!!")
+        }
+        // console.log($scope.counter)
+        // console.log($scope.set.length)
+        else{
+          Display($scope.set)
+        }
     }
 
     var Display = function(questions) {

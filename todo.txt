@@ -1,0 +1,4 @@
+TODO:
+- refactor entire codebase to ES6
+- refactor front-end to React/Redux
+- change design of front-end (maybe?)
